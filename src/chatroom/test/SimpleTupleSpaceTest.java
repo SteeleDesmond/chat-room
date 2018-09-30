@@ -1,28 +1,26 @@
 package chatroom.test;
 
 import chatroom.tuple.SimpleTuple;
-import chatroom.tuple.SimpleTupleSpace;
-
-import java.util.concurrent.ThreadLocalRandom;
+import chatroom.tuplespace.SimpleTupleSpace;
 
 public class SimpleTupleSpaceTest {
 
     public SimpleTupleSpaceTest() {
-        SimpleTupleSpace tupleSpace = new SimpleTupleSpace();
     }
 
     public void runEasyTest() {
         System.out.println("Running SimpleTupleSpace Easy Test...");
+        int testSize = 100;
+        SimpleTupleSpace tupleSpace = new SimpleTupleSpace(testSize);
         SimpleTuple tuple;
         final long startTime;
         final long endTime;
-
         String stringObj = "test";
         int intObj = 50;
         boolean boolObj = true;
 
         startTime = System.currentTimeMillis();
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < testSize; i++) {
             tuple = new SimpleTuple(stringObj, intObj, boolObj);
         }
         endTime = System.currentTimeMillis();
@@ -31,6 +29,8 @@ public class SimpleTupleSpaceTest {
 
     public void runHardTest() {
         System.out.println("Running SimpleTupleSpace Hard Test...");
+        int testSize = 100000000;
+        SimpleTupleSpace tupleSpace = new SimpleTupleSpace(testSize);
         SimpleTuple tuple;
         final long startTime;
         final long endTime;
@@ -40,7 +40,7 @@ public class SimpleTupleSpaceTest {
         boolean boolObj = true;
 
         startTime = System.currentTimeMillis();
-        for(int i = 0; i < 100000000; i++) {
+        for(int i = 0; i < testSize; i++) {
             tuple = new SimpleTuple(stringObj, intObj, boolObj);
         }
         endTime = System.currentTimeMillis();

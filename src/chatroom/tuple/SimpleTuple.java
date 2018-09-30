@@ -1,26 +1,48 @@
 package chatroom.tuple;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 
-public class SimpleTuple {
+public class SimpleTuple implements Comparable<Object> {
 
-    private ArrayList<Object> tuple = new ArrayList();
+    public ArrayList<Object> tupleList = new ArrayList();
 
+   public TreeSet<Object> test = new TreeSet<>();
     public SimpleTuple(Object... tupleParameters) {
-        tuple.addAll(Arrays.asList(tupleParameters));
+        tupleList.addAll(Arrays.asList(tupleParameters));
     }
 
     public Collection<Object> read() {
-        return tuple;
+        return tupleList;
     }
 
     public int size() {
-        return tuple.size();
+        return tupleList.size();
     }
 
     public Object get(int index) {
-        return tuple.get(index);
+        return tupleList.get(index);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SimpleTuple that = (SimpleTuple) o;
+
+
+        return Objects.equals(tupleList, that.tupleList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tupleList);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+
+
+
 }
