@@ -6,7 +6,6 @@ public class SimpleTuple implements Comparable<Object> {
 
     public ArrayList<Object> tupleList = new ArrayList();
 
-   public TreeSet<Object> test = new TreeSet<>();
     public SimpleTuple(Object... tupleParameters) {
         tupleList.addAll(Arrays.asList(tupleParameters));
     }
