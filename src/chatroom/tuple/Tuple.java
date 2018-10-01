@@ -1,15 +1,15 @@
 package chatroom.tuple;
 
+import javafx.scene.Parent;
+
 import java.util.*;
 
-public class Tuple implements Comparable<Object> {
+public class Tuple implements Comparator<Tuple> {
 
-    private TreeSet<Object> tuple = new TreeSet<>();
+    private TreeSet<Object> tuple = new TreeSet<>(Comparator.comparing(Object::hashCode));
 
     public Tuple(Object... items) {
         tuple.addAll(Arrays.asList(items));
-        //tuple.add(items);
-        //tuple.addAll(items);
     }
 
     public TreeSet<Object> getTuple() {
@@ -20,29 +20,31 @@ public class Tuple implements Comparable<Object> {
         return tuple.size();
     }
 
-//    public Collection<Object> getObject(Object o) {
-//
-//        Iterator<Object> it = tuple.iterator();
-//        int i = 0;
-//        Object current = null;
-//
-//        while(it.hasNext()) {
-//            if current =
-//        }
-//
-//        return Iterables.get(tuple, o);
+//    @Override
+//    public int compareTo(Tuple tuple) {
+//        return this.tuple.size() - tuple.size();
 //    }
 
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
-
+    /**
+     * Creates a string representation of the Tuple's contents
+     * @return a string representation of the Tuple's contents
+     */
     @Override
     public String toString() {
         return "Tuple{" +
                 "tuple=" + tuple +
                 '}';
+    }
+
+    @Override
+    public int compare(Tuple o1, Tuple o2) {
+        System.out.println("test");
+        if(o1.equals(o2)) {
+            return 0;
+        }
+        else {
+            return 1;
+        }
     }
 
     @Override

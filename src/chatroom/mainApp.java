@@ -17,13 +17,17 @@ public class mainApp {
         //HashMap<Integer,Object> testmap = new HashMap<>();
         //testmap.put(tuple2.size(),tuple2.tupleList);
 
-        //Tuple tuple = new Tuple("hello",19);
-        Tuple tuple = new Tuple(10, 20);
         TupleSpace tupleSpace = new TupleSpace(10);
+        Tuple tuple = new Tuple(10, 20, 5);
+        Tuple tuple0 = new Tuple(5, 10);
+        Tuple tuple1 = new Tuple("hello",19);
 
-        tupleSpace.add(tuple.getTuple());
+        tupleSpace.add(tuple);
+        tupleSpace.add(tuple0);
+        tupleSpace.add(tuple1);
 
-        System.out.print(tupleSpace);
+        System.out.print(tupleSpace.toString());
+
 
         //tuple2.test.add(tuple2);
         //System.out.print(tuple2.test);

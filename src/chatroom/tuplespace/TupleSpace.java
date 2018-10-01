@@ -32,13 +32,12 @@ public class TupleSpace {
     }
 
     /**
-     * Add a given pattern or list of items to the tuple space as a tuple. No duplicates are allowed.
-     * @param tupleContents The list of objects to add
+     * Add a tuple to the tuple space. No duplicates are allowed.
+     * @param tuple The tuple to add
      */
-    public void add(Object... tupleContents) {
-        Tuple tuple = new Tuple(tupleContents);
+    public void add(Tuple tuple) {
         tupleSpace.put(tuple.size(), tuple.getTuple());
-        System.out.println("Added tuple to tupleSpace");
+        System.out.println("Added tuple to tupleSpace with contents: " + tuple.getTuple());
     }
 
     /**
@@ -53,5 +52,14 @@ public class TupleSpace {
 
 
         return tupleToFind;
+    }
+
+    /**
+     * Override toString for testing purposes
+     * @return A string representation of the TupleSpace
+     */
+    @Override
+    public String toString() {
+        return tupleSpace.toString();
     }
 }
