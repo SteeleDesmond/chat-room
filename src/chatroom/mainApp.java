@@ -26,7 +26,7 @@ public class mainApp {
         tupleSpace.add(tuple0);
         tupleSpace.add(tuple1);
 
-        System.out.print(tupleSpace.toString());
+        System.out.println(tupleSpace);
 
 
         //tuple2.test.add(tuple2);

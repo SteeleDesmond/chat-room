@@ -60,6 +60,7 @@ public class TupleSpace {
      */
     @Override
     public String toString() {
-        return tupleSpace.toString();
+
+        return "TupleSpace = " + tupleSpace;
     }
 }
