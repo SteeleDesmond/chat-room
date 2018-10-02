@@ -44,7 +44,8 @@ public class SimpleTupleSpace {
         return null;
     }
 
-    public void add(SimpleTuple tuple) {
+    public void add(Object... tupleContents) {
+        SimpleTuple tuple = new SimpleTuple(tupleContents);
         int counter = 0;
 
         if (tuple.size() > maxTupleSize) {
