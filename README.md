@@ -1,4 +1,4 @@
-# Project #2 - Chat Room / Tuple Space
+# Project #3 - Chat Room / Tuple Space
 
 ## Versions (Jar files)
 
