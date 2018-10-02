@@ -7,6 +7,7 @@ Version 1.0 - Assignment requirements implementation
 ## How to use this program
 
 Possible Commands:
+
 'current user' -- Check which user you are currently logged in as
 
 'switch user' -- Switch to a different user. Enter the username of the user
