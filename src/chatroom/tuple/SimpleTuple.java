@@ -2,15 +2,15 @@ package chatroom.tuple;
 
 import java.util.*;
 
-public class SimpleTuple implements Comparable<Object> {
+public class SimpleTuple {
 
-    public ArrayList<Object> tupleList = new ArrayList();
+    private ArrayList<Object> tupleList = new ArrayList<>();
 
     public SimpleTuple(Object... tupleParameters) {
         tupleList.addAll(Arrays.asList(tupleParameters));
     }
 
-    public Collection<Object> read() {
+    public Collection<Object> getAsArrayList() {
         return tupleList;
     }
 
@@ -22,26 +22,29 @@ public class SimpleTuple implements Comparable<Object> {
         return tupleList.get(index);
     }
 
+//    implements Comparable<Object>
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        SimpleTuple that = (SimpleTuple) o;
+//
+//
+//        return Objects.equals(tupleList, that.tupleList);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(tupleList);
+//    }
+//
+//    @Override
+//    public int compareTo(Object o) {
+//        return 0;
+//    }
+
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SimpleTuple that = (SimpleTuple) o;
-
-
-        return Objects.equals(tupleList, that.tupleList);
+    public String toString() {
+        return tupleList.toString();
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(tupleList);
-    }
-
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
-
-
-
 }

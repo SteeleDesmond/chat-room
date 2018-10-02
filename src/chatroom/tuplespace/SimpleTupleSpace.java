@@ -3,70 +3,111 @@ package chatroom.tuplespace;
 import chatroom.tuple.SimpleTuple;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 
 public class SimpleTupleSpace {
 
-    private ArrayList<SimpleTuple> simpleTuples;
+    private ArrayList<SimpleTuple> tupleSpace = new ArrayList<>();
+    private int maxTupleSize;
 
     public SimpleTupleSpace(int size) {
-        simpleTuples = new ArrayList<>(size);
-
+        maxTupleSize = size;
     }
 
     public SimpleTuple remove(Object... items) {
 
-        boolean validFlag = true;
-        int lengthCount = 0;
-        SimpleTuple tupleToCheck;
-        
-        for (Object objectToFind : items) {
-            for(int i = 0; i < simpleTuples.size(); i++) {
+        SimpleTuple patternToFind = new SimpleTuple(items);
+        int counter = 0;
 
-                tupleToCheck = simpleTuples.get(i);
-                for(int j = 0; j < tupleToCheck.size(); j++) {
-                    if(objectToFind != "*" || objectToFind != tupleToCheck.get(j)) {
-                        validFlag = false;
-                    }
-                    else {
-                        j++;
-                    }
-                    if(!validFlag) {
-                        j = tupleToCheck.size();
-                    }
+        // Look at each Tuple in the TupleSpace and iterate through its contents.
+        // Compare the contents to the pattern to search for.
+        for (SimpleTuple t : tupleSpace) {
+            counter = 0;
+            for (Object o : t.getAsArrayList()) {
+                // If the object in the tuple is the same as the pattern, or it is a wildcard then keep going
+                if(o.equals(patternToFind.get(counter)) || patternToFind.get(counter) == "*") {
+                    counter++;
                 }
-                if(validFlag) {
-                    simpleTuples.remove(tupleToCheck);
-                    return tupleToCheck;
+                // Else it is not a matching tuple so go to the next tuple.
+                else {
+                    counter = 0;
+                    break;
                 }
-                validFlag = true;
+                // We found a tuple that matches the pattern
+                if(counter == patternToFind.size()) {
+                    tupleSpace.remove(t);
+                    return t;
+                }
             }
         }
-        tupleToCheck = new SimpleTuple(-1);
-        return tupleToCheck;
+        System.out.println("The pattern to remove wasn't found in the TupleSpace.");
+        return null;
     }
 
-    public void add(Object... tuple) {
-        SimpleTuple addSimpleTuple = new SimpleTuple(tuple);
-        if(read(tuple) != null) {
-            simpleTuples.add(addSimpleTuple);
+    public void add(SimpleTuple tuple) {
+        int counter = 0;
+
+        if (tuple.size() > maxTupleSize) {
+            System.out.println("Tuple size is longer than given max size -- Tuple has not been added.");
+            return;
         }
-        else {
-            System.out.println("Duplicate Tuple found -- Tuple has not been added.");
+        // Look at each Tuple in the TupleSpace and iterate through its contents.
+        // Compare the contents to the pattern to search for.
+        for (SimpleTuple t : tupleSpace) {
+            counter = 0;
+            for (Object o : t.getAsArrayList()) {
+                // If the object in the tuple is the same as the pattern
+                if(o.equals(tuple.get(counter))) {
+                    counter++;
+                }
+                // Else it is not a matching tuple so go to the next tuple.
+                else {
+                    counter = 0;
+                    break;
+                }
+                // We found a tuple that matches the pattern
+                if(counter == tuple.size()) {
+                    System.out.println("Duplicate Tuple found -- Tuple has not been added.");
+                    return;
+                }
+                //counter = 0;
+            }
         }
+        // The tuple is not already in the tuple space.
+        System.out.println("Tuple added");
+        tupleSpace.add(tuple);
     }
 
     public SimpleTuple read(Object... items) {
-        SimpleTuple tupleToFind = null;
-        for(int i = 0; i < simpleTuples.size(); i++) {
-            tupleToFind = simpleTuples.get(i);
+        SimpleTuple patternToFind = new SimpleTuple(items);
+        int counter = 0;
 
-            for(int j = 0; j < tupleToFind.size(); j++) {
-                if(tupleToFind.get(j) == items) {
-                    return tupleToFind;
+        // Look at each Tuple in the TupleSpace and iterate through its contents.
+        // Compare the contents to the pattern to search for.
+        for (SimpleTuple t : tupleSpace) {
+            counter = 0;
+            for (Object o : t.getAsArrayList()) {
+                // If the object in the tuple is the same as the pattern, or it is a wildcard then keep going
+                if(o.equals(patternToFind.get(counter)) || patternToFind.get(counter) == "*") {
+                    counter++;
+                }
+                // Else it is not a matching tuple so go to the next tuple.
+                else {
+                    counter = 0;
+                    break;
+                }
+                // We found a tuple that matches the pattern
+                if(counter == patternToFind.size()) {
+                    return t;
                 }
             }
         }
-        return tupleToFind;
+        //System.out.println("The pattern to read wasn't found in the TupleSpace.");
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return tupleSpace.toString();
     }
 }
