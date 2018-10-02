@@ -24,14 +24,15 @@ public class SimpleTupleSpaceTest {
             tuple = new SimpleTuple(stringObj, intObj + i, boolObj);
             tupleSpace.add(tuple);
         }
+        System.out.println(tupleSpace.toString());
         for(int i = 0; i < testSize; i++) {
             tuple = new SimpleTuple(stringObj, intObj + i, boolObj);
-            tupleSpace.read(tuple.getAsObjectList());
+            System.out.println(tupleSpace.read(tuple.getAsObjectList()));
         }
         for(int i = 0; i < testSize; i++) {
-            tuple = new SimpleTuple(stringObj, intObj + i, boolObj);
-            tupleSpace.remove(tuple);
+            tupleSpace.remove(stringObj, "*", boolObj);
         }
+        System.out.println(tupleSpace.toString());
         endTime = System.currentTimeMillis();
         System.out.println("Total execution time: " + (endTime - startTime) + " millisecond(s)" );
     }
