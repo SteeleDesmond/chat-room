@@ -6,12 +6,16 @@ public class SimpleTuple {
 
     private ArrayList<Object> tupleList = new ArrayList<>();
 
-    public SimpleTuple(Object... tupleParameters) {
-        tupleList.addAll(Arrays.asList(tupleParameters));
+    public SimpleTuple(Object... tupleContents) {
+        tupleList.addAll(Arrays.asList(tupleContents));
     }
 
     public Collection<Object> getAsArrayList() {
         return tupleList;
+    }
+
+    public Object[] getAsObjectList() {
+        return tupleList.toArray();
     }
 
     public int size() {

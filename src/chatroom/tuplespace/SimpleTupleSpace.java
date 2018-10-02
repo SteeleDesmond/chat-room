@@ -74,7 +74,7 @@ public class SimpleTupleSpace {
             }
         }
         // The tuple is not already in the tuple space.
-        System.out.println("Tuple added");
+        //System.out.println("Tuple added");
         tupleSpace.add(tuple);
     }
 
@@ -108,6 +108,6 @@ public class SimpleTupleSpace {
 
     @Override
     public String toString() {
-        return tupleSpace.toString();
+        return "TupleSpace contents: " + tupleSpace.toString();
     }
 }
