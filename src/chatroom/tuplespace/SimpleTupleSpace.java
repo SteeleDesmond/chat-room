@@ -40,7 +40,7 @@ public class SimpleTupleSpace {
                 }
             }
         }
-        System.out.println("The pattern to remove wasn't found in the TupleSpace.");
+        //System.out.println("The pattern to remove wasn't found in the TupleSpace.");
         return null;
     }
 

@@ -2,6 +2,8 @@ package chatroom.chat;
 
 import chatroom.tuplespace.SimpleTupleSpace;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
@@ -41,7 +43,12 @@ public class ChatRoom {
                     System.out.println();
                     break;
                 case "current user":
-                    System.out.println(uc.getCurrentUser());
+                    if(uc.getCurrentUser() != null) {
+                        System.out.println("You are currently logged in as: " + uc.getCurrentUser());
+                    }
+                    else {
+                        System.out.println("Currently, there are no registered users in the chat room.");
+                    }
                     break;
                 case "switch user":
                     System.out.println("Which user would you like to switch to?");
@@ -52,7 +59,11 @@ public class ChatRoom {
                     System.out.println(uc.getRecentMessages());
                     break;
                 case "get active users":
-                    System.out.println(uc.getActiveUsers());
+                    //String activeUsers[] = uc.getActiveUsers();
+//                    for(String user : activeUsers) {
+//                        System.out.println(user);
+//                    }
+                    System.out.println("Currently active users: " + uc.getActiveUsers());
                     break;
                 case "get all users":
                     System.out.println(uc.getAllUsers());
@@ -76,6 +87,8 @@ public class ChatRoom {
                     break;
                 case "exit":
                     exit(0);
+                default:
+                    System.out.println("Unrecognized command. Please try again, or type 'help' for more options.");
             }
         }
     }

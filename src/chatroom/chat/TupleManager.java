@@ -15,7 +15,7 @@ package chatroom.chat;
  */
 public class TupleManager {
 
-    public String[] makeCurrentUserTuple(String username) {
+    public Object[] makeCurrentUserTuple(String username) {
         String currentUserTuple[] = new String[2];
         String tag = "Current User";
         currentUserTuple[0] = tag;
@@ -31,7 +31,7 @@ public class TupleManager {
         return counterTuple;
     }
 
-    public String[] makeStatusTuple(String status, String username) {
+    public Object[] makeStatusTuple(String status, String username) {
         String statusTuple[] = new String[2];
         statusTuple[0] = status;
         statusTuple[1] = username;
@@ -48,7 +48,7 @@ public class TupleManager {
         return msgTuple;
     }
 
-    public String[] makeUserTuple(String username) {
+    public Object[] makeUserTuple(String username) {
         String userTuple[] = new String[2];
         String tag = "User";
         userTuple[0] = tag;

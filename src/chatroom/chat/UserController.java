@@ -16,6 +16,7 @@ import java.util.ArrayList;
  * userTuple -- ("User", "username")
  *
  * First object parameter is always a string tag.
+ * Tuples are stored as object or string arrays.
  */
 public class UserController {
 
@@ -33,7 +34,10 @@ public class UserController {
      */
     public String getCurrentUser() {
         Object[] currentUser = ts.read("Current User", "*");
-        return currentUser[1].toString();
+        if(currentUser != null) {
+            return currentUser[1].toString();
+        }
+        else return null;
     }
 
     /**
@@ -59,7 +63,24 @@ public class UserController {
      */
     public String getActiveUsers() {
 
-        return null;
+        Object[] currentUser;
+        ArrayList<Object[]> listOfUserTuples = new ArrayList<>();
+        ArrayList<String> activeUsers = new ArrayList<>();
+
+        if(ts.read("Active", "*") == null) {
+            return null;
+        }
+        // Get a list of all active users' user names from the tuple space
+        while(ts.read("Active", "*") != null) {
+            currentUser = ts.remove("Active", "*");
+            activeUsers.add(currentUser[1].toString());
+            listOfUserTuples.add(currentUser);
+        }
+        // Put the tuples back into the tuple space
+        for (Object[] user : listOfUserTuples) {
+            ts.add(user);
+        }
+        return activeUsers.toString();
     }
 
     /**
@@ -94,7 +115,7 @@ public class UserController {
             currentUser = ts.remove("User", "*");
             // If the username is taken
             if(username.equals(currentUser[1])) {
-                System.out.println("Username is taken from UserController");
+                //System.out.println("Username is taken from UserController");
 
                 // Put the list of users back into the Tuple Space
                 ts.add(currentUser);
@@ -114,12 +135,13 @@ public class UserController {
             ts.add(user);
         }
         // Then add the new user, add it as an active user, and make it the current user.
-        String[] newUser = tm.makeUserTuple(username);
+        Object[] newUser = tm.makeUserTuple(username);
         ts.add(newUser);
         System.out.println(newUser[0] + " " + newUser[1]);
 
         ts.remove("Current User", "*");
         ts.add(tm.makeCurrentUserTuple(username));
+        ts.add(tm.makeStatusTuple("Active", username));
         return true;
     }
 
