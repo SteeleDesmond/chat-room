@@ -65,8 +65,8 @@ public class UserController {
      * Get the 10 most recent messages posted to the tuple space.
      * @return A string containing the 10 most recent messages.
      */
-    public String getRecentMessages() {
-        // Might want to make this and active users return a String[]
+    public ArrayList<String> getRecentMessages() {
+
         return null;
     }
 
@@ -122,11 +122,18 @@ public class UserController {
     }
 
     /**
-     * Adds a message to the tuple space.
+     * Adds a message to the tuple space using a message tuple format.
      * @param msg The message to add
      */
-    public void postMessage(String msg) {
-
+    public boolean postMessage(String msg) {
+        if(getCurrentUser() == null) {
+            return false;
+        }
+        String currentUser = getCurrentUser();
+        int messageNumber = updateCounterTuple();
+        Object[] msgTuple = tm.makeMsgTuple(messageNumber, currentUser, msg);
+        ts.add(msgTuple);
+        return true;
     }
 
     /**
@@ -174,8 +181,10 @@ public class UserController {
         return true;
     }
 
-    private void updateCounterTuple() {
-
+    private int updateCounterTuple() {
+        Object[] counterTuple = ts.remove("Counter", "*");
+        ts.add(tm.makeCounterTuple((int) counterTuple[1] + 1));
+        return (int) counterTuple[1] + 1;
     }
 
 

@@ -82,8 +82,12 @@ public class ChatRoom {
                 case "post message":
                     System.out.println("Enter message: ");
                     input = sc.nextLine();
-                    uc.postMessage(input);
-                    System.out.println("Posted message: " + input);
+                    if(uc.postMessage(input)) {
+                        System.out.println("Posted message: " + input);
+                    }
+                    else {
+                        System.out.println("Message cannot be posted. Please register a user first.");
+                    }
                     break;
                 case "new user":
                     System.out.print("Please enter a username: ");
