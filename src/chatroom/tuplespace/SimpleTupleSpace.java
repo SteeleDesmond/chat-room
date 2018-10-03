@@ -14,7 +14,7 @@ public class SimpleTupleSpace {
         maxTupleSize = size;
     }
 
-    public SimpleTuple remove(Object... items) {
+    public Object[] remove(Object... items) {
 
         SimpleTuple patternToFind = new SimpleTuple(items);
         int counter = 0;
@@ -30,13 +30,13 @@ public class SimpleTupleSpace {
                 }
                 // Else it is not a matching tuple so go to the next tuple.
                 else {
-                    counter = 0;
+                    counter = 0; // Assignment is only redundant when the first parameter does not match.
                     break;
                 }
                 // We found a tuple that matches the pattern
                 if(counter == patternToFind.size()) {
                     tupleSpace.remove(t);
-                    return t;
+                    return t.getAsObjectList();
                 }
             }
         }
@@ -79,7 +79,7 @@ public class SimpleTupleSpace {
         tupleSpace.add(tuple);
     }
 
-    public SimpleTuple read(Object... items) {
+    public Object[] read(Object... items) {
         SimpleTuple patternToFind = new SimpleTuple(items);
         int counter = 0;
 
@@ -99,7 +99,7 @@ public class SimpleTupleSpace {
                 }
                 // We found a tuple that matches the pattern
                 if(counter == patternToFind.size()) {
-                    return t;
+                    return t.getAsObjectList();
                 }
             }
         }

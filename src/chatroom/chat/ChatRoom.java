@@ -35,6 +35,7 @@ public class ChatRoom {
                     System.out.println("'switch user' -- Switch to a different user. Enter the username of the user");
                     System.out.println("'get recent messages' -- Retrieve the last 10 messages posted in the chat room");
                     System.out.println("'get active users' -- Get a list of active users in the chat room");
+                    System.out.println("'get all users' -- Get a list of all users in the chat room");
                     System.out.println("'post message' -- Post a new message as the current user");
                     System.out.println("'new user' -- Create a new user and log in as them");
                     System.out.println();
@@ -52,6 +53,9 @@ public class ChatRoom {
                     break;
                 case "get active users":
                     System.out.println(uc.getActiveUsers());
+                    break;
+                case "get all users":
+                    System.out.println(uc.getAllUsers());
                     break;
                 case "post message":
                     System.out.println("Enter message: ");
