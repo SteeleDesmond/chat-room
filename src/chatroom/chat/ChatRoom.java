@@ -1,9 +1,6 @@
 package chatroom.chat;
 
 import chatroom.tuplespace.SimpleTupleSpace;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
@@ -61,7 +58,17 @@ public class ChatRoom {
                     }
                     break;
                 case "get recent messages":
-                    System.out.println(uc.getRecentMessages());
+                    if(uc.getRecentMessages() == null) {
+                        System.out.println("There are currently no messages posted. *crickets*");
+                    }
+                    else {
+                        System.out.println("Most recent posts: ");
+                        System.out.println();
+                        for(String s : uc.getRecentMessages()) {
+                            System.out.println(s);
+                        }
+                        System.out.println();
+                    }
                     break;
                 case "get active users":
                     if(uc.getActiveUsers() == null) {

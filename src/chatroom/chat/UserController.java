@@ -66,8 +66,26 @@ public class UserController {
      * @return A string containing the 10 most recent messages.
      */
     public ArrayList<String> getRecentMessages() {
+        ArrayList<Object[]> listOfMessageTuples = new ArrayList<>();
+        ArrayList<String> messageList = new ArrayList<>();
 
-        return null;
+        if(ts.read("Msg", "*", "*", "*") == null) {
+            return null;
+        }
+
+        int latestMessage = getCounter();
+        // Pull out the 10 most recent messages from the tuple space and extract the message from them
+        for(int i = latestMessage; i > 0 && i > latestMessage - 10; i--) {
+            Object[] currentMessage = ts.remove("Msg", i, "*", "*");
+            messageList.add("(Msg ID:" + currentMessage[1] + ") (User: " + currentMessage[2].toString() +  ") : " + currentMessage[3].toString());
+            listOfMessageTuples.add(currentMessage);
+        }
+
+        // Put the tuples back into the tuple space
+        for (Object[] msg : listOfMessageTuples) {
+            ts.add(msg);
+        }
+        return messageList;
     }
 
     /**
@@ -185,6 +203,11 @@ public class UserController {
         Object[] counterTuple = ts.remove("Counter", "*");
         ts.add(tm.makeCounterTuple((int) counterTuple[1] + 1));
         return (int) counterTuple[1] + 1;
+    }
+
+    private int getCounter() {
+        Object[] counterTuple = ts.read("Counter", "*");
+        return (int) counterTuple[1];
     }
 
 
