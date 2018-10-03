@@ -43,9 +43,22 @@ public class UserController {
     /**
      * Switch the current user to a different user.
      * @param username The username of the user to switch to.
+     * @return True = the user was switched, false means the current user did not switch.
      */
-    public void switchCurrentUser(String username) {
-
+    public boolean switchCurrentUser(String username) {
+        if(getCurrentUser() == null) {
+            return false;
+        }
+        for(String s : getAllUsers()) {
+            // If we find the username they would like to switch to then it exists and we can switch
+            if(s.equals(username)) {
+                Object[] newCurrentUser = tm.makeCurrentUserTuple(username);
+                ts.remove("Current User", "*");
+                ts.add(newCurrentUser);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -61,7 +74,7 @@ public class UserController {
      * Get a list of active users in the tuple space.
      * @return A string containing the active users in the tuple space.
      */
-    public String getActiveUsers() {
+    public ArrayList<String> getActiveUsers() {
 
         Object[] currentUser;
         ArrayList<Object[]> listOfUserTuples = new ArrayList<>();
@@ -80,16 +93,32 @@ public class UserController {
         for (Object[] user : listOfUserTuples) {
             ts.add(user);
         }
-        return activeUsers.toString();
+        return activeUsers;
     }
 
     /**
      * Get a list of all users in the tuple space.
      * @return A string containing the active users in the tuple space.
      */
-    public String getAllUsers() {
+    public ArrayList<String> getAllUsers() {
+        Object[] currentUser;
+        ArrayList<Object[]> listOfUserTuples = new ArrayList<>();
+        ArrayList<String> allUsers = new ArrayList<>();
 
-        return null;
+        if(ts.read("User", "*") == null) {
+            return null;
+        }
+        // Get a list of all active users' user names from the tuple space
+        while(ts.read("User", "*") != null) {
+            currentUser = ts.remove("User", "*");
+            allUsers.add(currentUser[1].toString());
+            listOfUserTuples.add(currentUser);
+        }
+        // Put the tuples back into the tuple space
+        for (Object[] user : listOfUserTuples) {
+            ts.add(user);
+        }
+        return allUsers;
     }
 
     /**
