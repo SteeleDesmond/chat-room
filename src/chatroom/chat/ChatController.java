@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Manages the users of the chat room. Handles all interactions with the tuple space.
  *
- * Internal Tuple patterns used:
+ * Tuple patterns used:
  * currentUserTuple -- ("Current User", "username")
  * counterTuple -- ("Count", int)
  * statusTuple -- ("Active/Inactive", "username")
@@ -18,12 +18,12 @@ import java.util.ArrayList;
  * First object parameter is always a string tag.
  * Tuples are stored as object or string arrays.
  */
-public class UserController {
+public class ChatController {
 
     private SimpleTupleSpace ts;
     private TupleManager tm = new TupleManager();
 
-    public UserController(SimpleTupleSpace ts) {
+    public ChatController(SimpleTupleSpace ts) {
         this.ts = ts;
         ts.add(tm.makeCounterTuple(0));
     }
@@ -171,7 +171,7 @@ public class UserController {
             currentUser = ts.remove("User", "*");
             // If the username is taken
             if(username.equals(currentUser[1])) {
-                //System.out.println("Username is taken from UserController");
+                //System.out.println("Username is taken from ChatController");
 
                 // Put the list of users back into the Tuple Space
                 ts.add(currentUser);

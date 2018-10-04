@@ -7,7 +7,7 @@ import static java.lang.System.exit;
 
 public class ChatRoom {
 
-    private UserController uc = new UserController(new SimpleTupleSpace(10));
+    private ChatController uc = new ChatController(new SimpleTupleSpace(10));
     private Scanner sc = new Scanner(System.in);
     private boolean isRunning;
 
