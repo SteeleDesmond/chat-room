@@ -52,9 +52,10 @@ public class UserController {
         for(String s : getAllUsers()) {
             // If we find the username they would like to switch to then it exists and we can switch
             if(s.equals(username)) {
-                Object[] newCurrentUser = tm.makeCurrentUserTuple(username);
                 ts.remove("Current User", "*");
-                ts.add(newCurrentUser);
+                ts.add(tm.makeCurrentUserTuple(username));
+                ts.remove("Active", username);
+                ts.add(tm.makeStatusTuple("Inactive", username));
                 return true;
             }
         }
@@ -62,10 +63,11 @@ public class UserController {
     }
 
     /**
-     * Get the 10 most recent messages posted to the tuple space.
-     * @return A string containing the 10 most recent messages.
+     * Get the most recent messages posted to the tuple space.
+     * @param numberToRetrieve the number of messages to retrieve
+     * @return A string containing the n most recent messages.
      */
-    public ArrayList<String> getRecentMessages() {
+    public ArrayList<String> getRecentMessages(int numberToRetrieve) {
         ArrayList<Object[]> listOfMessageTuples = new ArrayList<>();
         ArrayList<String> messageList = new ArrayList<>();
 
@@ -75,7 +77,7 @@ public class UserController {
 
         int latestMessage = getCounter();
         // Pull out the 10 most recent messages from the tuple space and extract the message from them
-        for(int i = latestMessage; i > 0 && i > latestMessage - 10; i--) {
+        for(int i = latestMessage; i > 0 && i > latestMessage - numberToRetrieve; i--) {
             Object[] currentMessage = ts.remove("Msg", i, "*", "*");
             messageList.add("(Msg ID:" + currentMessage[1] + ") (User: " + currentMessage[2].toString() +  ") : " + currentMessage[3].toString());
             listOfMessageTuples.add(currentMessage);

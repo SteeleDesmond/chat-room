@@ -30,16 +30,16 @@ public class ChatRoom {
                 case "help":
                     System.out.println();
                     System.out.println("Possible Commands:");
-                    System.out.println("'current user' -- Check which user you are currently logged in as");
-                    System.out.println("'switch user' -- Switch to a different user. Enter the username of the user");
-                    System.out.println("'get recent messages' -- Retrieve the last 10 messages posted in the chat room");
-                    System.out.println("'get active users' -- Get a list of active users in the chat room");
-                    System.out.println("'get all users' -- Get a list of all users in the chat room");
-                    System.out.println("'post message' -- Post a new message as the current user");
-                    System.out.println("'new user' -- Create a new user and log in as them");
+                    System.out.println("'(cu)current user' -- Check which user you are currently logged in as");
+                    System.out.println("'(s)switch user' -- Switch to a different user. Enter the username of the user");
+                    System.out.println("'(m)get recent messages' -- Retrieve the last 10 messages posted in the chat room");
+                    System.out.println("'(a)get active users' -- Get a list of active users in the chat room");
+                    System.out.println("'(all)get all users' -- Get a list of all users in the chat room");
+                    System.out.println("'(pm)post message' -- Post a new message as the current user");
+                    System.out.println("'(nu)new user' -- Create a new user and log in as them");
                     System.out.println();
                     break;
-                case "current user":
+                case "cu":
                     if(uc.getCurrentUser() != null) {
                         System.out.println("You are currently logged in as: " + uc.getCurrentUser());
                     }
@@ -47,7 +47,7 @@ public class ChatRoom {
                         System.out.println("Currently, there are no registered users in the chat room.");
                     }
                     break;
-                case "switch user":
+                case "s":
                     System.out.println("Which user would you like to switch to?");
                     input = sc.nextLine();
                     if(uc.switchCurrentUser(input)) {
@@ -57,28 +57,28 @@ public class ChatRoom {
                         System.out.println("The given username has not been registered in the chat room.");
                     }
                     break;
-                case "get recent messages":
-                    if(uc.getRecentMessages() == null) {
+                case "m":
+                    if(uc.getRecentMessages(1) == null) {
                         System.out.println("There are currently no messages posted. *crickets*");
                     }
                     else {
                         System.out.println("Most recent posts: ");
                         System.out.println();
-                        for(String s : uc.getRecentMessages()) {
+                        for(String s : uc.getRecentMessages(10)) {
                             System.out.println(s);
                         }
                         System.out.println();
                     }
                     break;
-                case "get active users":
+                case "a":
                     if(uc.getActiveUsers() == null) {
                         System.out.println("There are currently no active users.");
                     }
                     else {
-                        System.out.print("Currently active users: " + uc.getActiveUsers().toString());
+                        System.out.println("Currently active users: " + uc.getActiveUsers().toString());
                     }
                     break;
-                case "get all users":
+                case "all":
                     if(uc.getAllUsers() == null) {
                         System.out.println("There are no users currently registered. Type 'new user' to register!");
                     }
@@ -86,7 +86,7 @@ public class ChatRoom {
                         System.out.print("All registered users: " + uc.getAllUsers().toString());
                     }
                     break;
-                case "post message":
+                case "pm":
                     System.out.println("Enter message: ");
                     input = sc.nextLine();
                     if(uc.postMessage(input)) {
@@ -96,7 +96,7 @@ public class ChatRoom {
                         System.out.println("Message cannot be posted. Please register a user first.");
                     }
                     break;
-                case "new user":
+                case "nu":
                     System.out.print("Please enter a username: ");
                     input = sc.nextLine();
 
