@@ -86,9 +86,8 @@ public class SimpleTupleSpaceTest {
         System.out.println("Total execution time: " + (endTime - startTime) + " millisecond(s)" );
     }
 
-    public void runStressTest() {
+    public void runStressTest(int testSize) {
         System.out.println("Running SimpleTupleSpace Stress Test...");
-        int testSize = 10000;
         SimpleTupleSpace ts = new SimpleTupleSpace(testSize);
         final long startTime;
         final long endTime;
@@ -107,6 +106,18 @@ public class SimpleTupleSpaceTest {
             ts.add(doubleObj + i);
             ts.add(intObj - i);
             ts.add(stringObj + i, boolObj);
+        }
+        for(int i = 0; i < testSize; i++) {
+            ts.read(stringObj, intObj + i, doubleObj - i, boolObj);
+            ts.read(doubleObj + i);
+            ts.read(intObj - i);
+            ts.read(stringObj + i, boolObj);
+        }
+        for(int i = 0; i < testSize; i++) {
+            ts.remove(stringObj, intObj + i, doubleObj - i, boolObj);
+            ts.remove(doubleObj + i);
+            ts.remove(intObj - i);
+            ts.remove(stringObj + i, boolObj);
         }
         endTime = System.currentTimeMillis();
         System.out.println("Total execution time: " + (endTime - startTime) + " millisecond(s)" );

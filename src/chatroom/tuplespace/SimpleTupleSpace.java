@@ -125,6 +125,10 @@ public class SimpleTupleSpace {
         return null;
     }
 
+    /**
+     * Override toString for testing purposes
+     * @return A string representation of the TupleSpace
+     */
     @Override
     public String toString() {
         return "TupleSpace contents: " + tupleSpace.toString();

@@ -123,7 +123,10 @@ public class ChatRoom {
                             tsTest.runCorrectnessTest();
                             break;
                         case "ss":
-                            tsTest.runStressTest();
+                            System.out.println("The test will add, read, and remove tuples from the tuple space. " +
+                                    "How many tuples should we add? (50,000 ~= 50 seconds)");
+                            input = sc.nextLine();
+                            tsTest.runStressTest(Integer.parseInt(input) / 4);
                             break;
                         case "ac":
                             System.out.println("ac");
