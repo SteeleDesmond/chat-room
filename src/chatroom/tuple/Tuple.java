@@ -7,16 +7,17 @@ import java.util.*;
 public class Tuple {
 
 
-    private TreeSet<Object> tuple = new TreeSet<>(Comparator.comparing(Object::hashCode));
+//    private TreeSet<Object> tuple = new TreeSet<>(Comparator.comparing(Object::hashCode));
 //    private Comparator tupleComparator = new TupleComparator();
 //    private TreeSet<Object> tuple = new TreeSet<Object>(tupleComparator);
+    private ArrayList<Object> tuple = new ArrayList<>();
 
 
     public Tuple(Object... items) {
         tuple.addAll(Arrays.asList(items));
     }
 
-    public TreeSet<Object> getTuple() {
+    public ArrayList<Object> getTuple() {
         return tuple;
     }
 

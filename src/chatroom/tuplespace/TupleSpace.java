@@ -20,14 +20,13 @@ public class TupleSpace implements TupleSpaceInterface {
      */
     public Object[] read(Object... tupleContents) {
 
-        for(Integer key : tupleSpace.keySet())
-        {
-            if(key > 0)
-            {
+        for(Integer key : tupleSpace.keySet()) {
+            if(key == tupleContents.length) {
                 System.out.println(tupleSpace.get(key).getTuple().toString());
-                System.out.println();
+                //System.out.println();
             }
         }
+        //tupleSpace.get(tupleContents.length).getTuple().
         return null;
     }
 
@@ -37,6 +36,11 @@ public class TupleSpace implements TupleSpaceInterface {
      */
     public void add(Object... items) {
         Tuple tuple = new Tuple(items);
+
+//        for(Tuple t : tupleSpace.get(items.length)) {
+//
+//        }
+
         tupleSpace.put(tuple.size(), tuple);
         System.out.println("Added tuple to tupleSpace with contents: " + tuple.getTuple());
     }
@@ -48,7 +52,14 @@ public class TupleSpace implements TupleSpaceInterface {
      * @return A tuple that matches the pattern of objects given
      */
     public Object[] remove(Object... tupleContents) {
-
+        for(Integer key : tupleSpace.keySet())
+        {
+            if(key > 0)
+            {
+                System.out.println(tupleSpace.get(key).getTuple().toString());
+                System.out.println();
+            }
+        }
         return null;
     }
 
