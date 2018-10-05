@@ -92,7 +92,7 @@ public class ChatRoom {
                         System.out.println("There are no users currently registered. Type 'new user' to register!");
                     }
                     else {
-                        System.out.print("All registered users: " + uc.getAllUsers().toString());
+                        System.out.println("All registered users: " + uc.getAllUsers().toString());
                     }
                     break;
                 case "pm":
