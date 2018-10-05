@@ -4,6 +4,13 @@
 
 Version 1.0 - Assignment requirements implementation
 
+## Overview
+
+This repository includes a tuple space implementation in java and a chat room to
+demonstrate usage of the tuple space. The chat room is simple to use and is
+console based. In the implementation, the only active user is the user that is 
+currently being used.
+
 ## How to use the chat room
 
 Possible Commands:
@@ -22,6 +29,7 @@ Possible Commands:
 
 '(nu)new user' -- Create a new user and log in as them
 
+'(t)testing mode' -- Call the tuple space test classes
 
 ## Implemented Features
 
@@ -29,3 +37,8 @@ There is a simple tuple space, a more efficient tuple space, and a chat room tha
 uses the tuple space.
 
 ## Testing and Debugging
+
+There are tests for correctness and efficiency in the TupleSpaceTest class.
+When the chat room is ran, use the command (t) to run the tests.
+
+##### See docs for design and more class descriptions
