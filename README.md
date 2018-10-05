@@ -29,6 +29,7 @@ Possible Commands:
 
 '(nu)new user' -- Create a new user and log in as them
 
+'(t)testing mode' -- Call the tuple space test classes
 
 ## Implemented Features
 
@@ -40,4 +41,4 @@ uses the tuple space.
 There are tests for correctness and efficiency in the TupleSpaceTest class.
 When the chat room is ran, use the command (t) to run the tests.
 
-##### See docs for design and more method descriptions
+##### See docs for design and more class descriptions
