@@ -8,51 +8,105 @@ public class SimpleTupleSpaceTest {
     public SimpleTupleSpaceTest() {
     }
 
-    public void runEasyTest() {
-        System.out.println("Running SimpleTupleSpace Easy Test...");
-        int testSize = 100;
-        SimpleTupleSpace tupleSpace = new SimpleTupleSpace(testSize);
-        SimpleTuple tuple;
+    public void runCorrectnessTest() {
+        System.out.println("Running SimpleTupleSpace Correctness Test...");
+        int testSize = 10;
+        SimpleTupleSpace ts = new SimpleTupleSpace(10);
         final long startTime;
         final long endTime;
-        String stringObj = "test";
+        Object[] tuple;
+
+        // 4 different simple objects
+        String stringObj = "String-Object";
         int intObj = 50;
+        Double doubleObj = -50.0;
         boolean boolObj = true;
 
         startTime = System.currentTimeMillis();
+        System.out.println("Adding up to 50 tuples of different sizes (including duplicates) to Tuple Space...");
         for(int i = 0; i < testSize; i++) {
-            tuple = new SimpleTuple(stringObj, intObj + i, boolObj);
-            tupleSpace.add(tuple);
+            ts.add(boolObj); // Size 1 Tuple
+            ts.add(intObj + i, boolObj); // Size 2 tuple
+            ts.add(doubleObj, intObj + i, stringObj); // Size 3 Tuple
+            ts.add(stringObj, intObj, doubleObj + i, boolObj); // Size 4 Tuple
+            ts.add(stringObj, intObj, doubleObj, boolObj, stringObj, doubleObj, intObj + i, boolObj); // Size 8 Tuple
         }
-        System.out.println(tupleSpace.toString());
-        for(int i = 0; i < testSize; i++) {
-            tuple = new SimpleTuple(stringObj, intObj + i, boolObj);
-            System.out.println(tupleSpace.read(tuple.getAsObjectList()));
+        System.out.println("Contents of Tuple Space...");
+        System.out.println(ts.toString());
+
+        System.out.println("Reading tuples of different sizes from Tuple Space...");
+
+        System.out.println("Searching for tuple matching pattern ('*', '*', '*', '*')");
+        System.out.print("Tuple found = ");
+        tuple = ts.read("*", "*", "*", "*");
+        for(Object o : tuple) {
+            System.out.print(o + " ");
         }
-        for(int i = 0; i < testSize; i++) {
-            tupleSpace.remove(stringObj, "*", boolObj);
+        System.out.println();
+
+        System.out.println("Searching for tuple matching pattern ('*', '*', 'String-Object')");
+        System.out.print("Tuple found = ");
+        tuple = ts.read("*", "*", "String-Object");
+        for(Object o : tuple) {
+            System.out.print(o + " ");
         }
-        System.out.println(tupleSpace.toString());
+        System.out.println();
+
+        System.out.println("Searching for tuple matching pattern ('true')");
+        System.out.print("Tuple found = ");
+        tuple = ts.read(true);
+        for(Object o : tuple) {
+            System.out.print(o + " ");
+        }
+        System.out.println();
+
+        System.out.println("Removing tuples of different sizes from Tuple Space...");
+        System.out.println("Removing tuples matching pattern ('*', '*')");
+        while(ts.read("*", "*") != null) {
+            tuple = ts.remove("*", "*");
+            System.out.print("Tuple removed = ");
+            for(Object o : tuple) {
+                System.out.print(o + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.println("Removing tuples matching pattern ('String-Object', '*', '*', '*')");
+        while(ts.read("String-Object", "*", "*", "*") != null) {
+            tuple = ts.remove("String-Object", "*", "*", "*");
+            System.out.print("Tuple removed = ");
+            for(Object o : tuple) {
+                System.out.print(o + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.println(ts.toString());
         endTime = System.currentTimeMillis();
         System.out.println("Total execution time: " + (endTime - startTime) + " millisecond(s)" );
     }
 
-    public void runHardTest() {
-        System.out.println("Running SimpleTupleSpace Hard Test...");
-        int testSize = 1000000;
-        SimpleTupleSpace tupleSpace = new SimpleTupleSpace(testSize);
-        SimpleTuple tuple;
+    public void runStressTest() {
+        System.out.println("Running SimpleTupleSpace Stress Test...");
+        int testSize = 10000;
+        SimpleTupleSpace ts = new SimpleTupleSpace(testSize);
         final long startTime;
         final long endTime;
+        Object[] tuple;
 
-        String stringObj = "test";
+        // 4 different simple objects
+        String stringObj = "String-Object";
         int intObj = 50;
+        Double doubleObj = -50.0;
         boolean boolObj = true;
 
+        System.out.println("Adding " + testSize*4 + " Tuples to Tuple Space");
         startTime = System.currentTimeMillis();
         for(int i = 0; i < testSize; i++) {
-            tuple = new SimpleTuple(stringObj, intObj + i, boolObj);
-            tupleSpace.add(tuple);
+            ts.add(stringObj, intObj + i, doubleObj - i, boolObj);
+            ts.add(doubleObj + i);
+            ts.add(intObj - i);
+            ts.add(stringObj + i, boolObj);
         }
         endTime = System.currentTimeMillis();
         System.out.println("Total execution time: " + (endTime - startTime) + " millisecond(s)" );

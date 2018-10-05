@@ -1,5 +1,6 @@
 package chatroom.chat;
 
+import chatroom.test.SimpleTupleSpaceTest;
 import chatroom.tuplespace.SimpleTupleSpace;
 import java.util.Scanner;
 
@@ -7,6 +8,7 @@ import static java.lang.System.exit;
 
 public class ChatRoom {
 
+    private SimpleTupleSpaceTest tsTest = new SimpleTupleSpaceTest();
     private ChatController uc = new ChatController(new SimpleTupleSpace(10));
     private Scanner sc = new Scanner(System.in);
     private boolean isRunning;
@@ -37,6 +39,7 @@ public class ChatRoom {
                     System.out.println("'(all)get all users' -- Get a list of all users in the chat room");
                     System.out.println("'(pm)post message' -- Post a new message as the current user");
                     System.out.println("'(nu)new user' -- Create a new user and log in as them");
+                    System.out.println("'(t)testing mode' -- Call the tuple space test classes");
                     System.out.println();
                     break;
                 case "cu":
@@ -105,6 +108,29 @@ public class ChatRoom {
                     }
                     else {
                         System.out.println("Username is taken. User has not been added.");
+                    }
+                    break;
+                case "t":
+                    System.out.println("Testing Mode: Testing options...");
+                    System.out.println("'(sc)simple correctness test'");
+                    System.out.println("'(ss)simple stress test'");
+                    System.out.println("'(ac)advanced correctness test'");
+                    System.out.println("'(as)advanced stress test'");
+                    System.out.println();
+                    input = sc.nextLine();
+                    switch(input) {
+                        case "sc":
+                            tsTest.runCorrectnessTest();
+                            break;
+                        case "ss":
+                            tsTest.runStressTest();
+                            break;
+                        case "ac":
+                            System.out.println("ac");
+                            break;
+                        case "as":
+                            System.out.println("as");
+                            break;
                     }
                     break;
                 case "exit":

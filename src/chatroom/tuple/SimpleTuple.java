@@ -2,6 +2,10 @@ package chatroom.tuple;
 
 import java.util.*;
 
+/**
+ * SimpleTuple is used internally for the Tuple Space to perform operations. It is constructed with an arbitrary size
+ * array of objects and it stores the input as an ArrayList. Contains basic helper functions
+ */
 public class SimpleTuple {
 
     private ArrayList<Object> tupleList = new ArrayList<>();
@@ -10,7 +14,7 @@ public class SimpleTuple {
         tupleList.addAll(Arrays.asList(tupleContents));
     }
 
-    public Collection<Object> getAsArrayList() {
+    public ArrayList<Object> getAsArrayList() {
         return tupleList;
     }
 
