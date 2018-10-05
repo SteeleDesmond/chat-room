@@ -30,9 +30,7 @@ public class Tuple {
      */
     @Override
     public String toString() {
-        return "Tuple{" +
-                "tuple=" + tuple +
-                '}';
+        return "Tuple = " + tuple;
     }
 
 //    implements Comparable<Tuple>
@@ -81,3 +79,4 @@ public class Tuple {
 //        }
 //    }
 }
+

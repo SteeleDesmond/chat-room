@@ -1,14 +1,20 @@
 package chatroom.chat;
 
-import chatroom.test.SimpleTupleSpaceTest;
+import chatroom.test.TupleSpaceTest;
 import chatroom.tuplespace.SimpleTupleSpace;
+import chatroom.tuplespace.TupleSpace;
+
 import java.util.Scanner;
 
 import static java.lang.System.exit;
 
+/**
+ * Coordinator / Chat Room. Delegates work related to Storage/TupleSpace to the ChatController. Creates a TupleSpaceTest
+ * object for testing the two tuple spaces.
+ */
 public class ChatRoom {
 
-    private SimpleTupleSpaceTest tsTest = new SimpleTupleSpaceTest();
+    private TupleSpaceTest tsTest = new TupleSpaceTest();
     private ChatController uc = new ChatController(new SimpleTupleSpace(10));
     private Scanner sc = new Scanner(System.in);
     private boolean isRunning;
@@ -120,19 +126,25 @@ public class ChatRoom {
                     input = sc.nextLine();
                     switch(input) {
                         case "sc":
-                            tsTest.runCorrectnessTest();
+                            tsTest.runCorrectnessTest(new SimpleTupleSpace(10));
                             break;
                         case "ss":
                             System.out.println("The test will add, read, and remove tuples from the tuple space. " +
                                     "How many tuples should we add? (50,000 ~= 50 seconds)");
                             input = sc.nextLine();
-                            tsTest.runStressTest(Integer.parseInt(input) / 4);
+                            // Divide by 4 because we make 4 tuples of different sizes in the test
+                            tsTest.runStressTest(new SimpleTupleSpace(Integer.parseInt(input)/4),
+                                                                   Integer.parseInt(input) / 4);
                             break;
                         case "ac":
-                            System.out.println("ac");
+                            tsTest.runCorrectnessTest(new TupleSpace(10));
                             break;
                         case "as":
-                            System.out.println("as");
+                            System.out.println("The test will add, read, and remove tuples from the tuple space. " +
+                                    "How many tuples should we add?");
+                            input = sc.nextLine();
+                            tsTest.runStressTest(new TupleSpace(Integer.parseInt(input)/4),
+                                                             Integer.parseInt(input)/4);
                             break;
                     }
                     break;

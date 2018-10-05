@@ -1,8 +1,8 @@
 package chatroom.chat;
 
 /**
- * Manages the different kinds of tuples that can be placed in the TupleSpace. This is to help keep the TupleSpace
- * tuples uniform.
+ * Manages the different kinds of tuples that are used for the chat room implementation.
+ * This is to help keep the TupleSpace tuples uniform.
  *
  * Internal Tuple patterns created:
  * currentUserTuple -- ("Current User", "username")

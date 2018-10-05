@@ -10,7 +10,7 @@ import java.util.Arrays;
  * the tuple space. Tuples are represented as an arbitrary size array of objects as input and are returned as a finite
  * array of objects.
  */
-public class SimpleTupleSpace {
+public class SimpleTupleSpace implements TupleSpaceInterface {
 
     private ArrayList<SimpleTuple> tupleSpace = new ArrayList<>();
     private int maxTupleSize;
