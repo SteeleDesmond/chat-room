@@ -1,4 +1,5 @@
-# Project #3 - Chat Room / Tuple Space
+Author: Steele Desmond - sdesmondemail@gmail.com
+# Chat Room / Tuple Space Implementation
 
 ## Versions (Jar files)
 
